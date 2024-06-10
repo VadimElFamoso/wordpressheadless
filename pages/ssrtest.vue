@@ -24,7 +24,7 @@
     methods: {
       async displayPages() {
         try {
-          const pages = await $fetch('http://localhost:9000/wp-json/wp/v2/pages', {
+          const pages = await $fetch(`${process.env.WORDPRESS_HOST}wp-json/wp/v2/pages`, {
             parseResponse: JSON.parse,
             method: 'GET',
           });
