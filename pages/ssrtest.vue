@@ -2,7 +2,6 @@
   <h1>SSRTest</h1>
   <p>Bonjour</p>
   <div v-if="posts.length">
-
     <h1>Voici la liste des articles :</h1>
     <ul>
       <li v-for="post in posts" :key="post.id">
@@ -13,7 +12,6 @@
         </p>
       </li>
     </ul>
-
   </div>
   <div v-else>
     No pages fetched yet.
@@ -29,9 +27,7 @@ const { data: posts, error } = await useAsyncData('posts', () =>
 
 if (error.value) {
   console.error('An error occurred:', error.value)
+} else {
+  console.log(posts.value)  // Debug: log the posts data
 }
 </script>
-
-<style>
-/* Ajoutez vos styles ici */
-</style>
