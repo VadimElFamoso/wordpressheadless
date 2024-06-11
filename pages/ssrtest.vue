@@ -30,11 +30,11 @@
     methods: {
       async displayPages(root) {
         try {
-          const pages = await $fetch(`${root}wp-json/wp/v2/posts`, {
+          const posts = await $fetch(`${root}wp-json/wp/v2/posts`, {
             parseResponse: JSON.parse,
             method: 'GET',
           });
-          this.pages = pages;
+          this.posts = posts;
         } catch (error) {
           console.error('An error occurred:', error);
         }
