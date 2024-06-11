@@ -1,13 +1,13 @@
 <template>
   <h1>SSRTest</h1>
   <p>Bonjour</p>
-  <div v-if="posts.length">
+  <div v-if="posts && posts.length">
     <h1>Voici la liste des articles :</h1>
     <ul>
       <li v-for="post in posts" :key="post.id">
         {{ post.title.rendered }}
         <p>
-          Afin de voir l'article cliquez sur le lien suivant :
+          Afin de voir l'article cliquez sur le lien suivant : 
           <nuxt-link :to="{ name: 'posts-id', params: { id: post.id } }">ici</nuxt-link>
         </p>
       </li>
@@ -19,18 +19,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { useAsyncData } from 'nuxt/app'
 
-const posts = ref([])
+const { data: posts, error } = await useAsyncData('posts', () =>
+  fetch('https://test.agence-lt.fr/wp-json/wp/v2/posts').then(res => res.json())
+)
 
-const fetchPosts = async () => {
-  try {
-    const res = await fetch('https://test.agence-lt.fr/wp-json/wp/v2/posts')
-    posts.value = await res.json()
-  } catch (error) {
-    console.error('An error occurred:', error)
-  }
+if (error.value) {
+  console.error('An error occurred:', error.value)
 }
-
-onMounted(fetchPosts)
 </script>
