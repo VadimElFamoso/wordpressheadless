@@ -16,19 +16,16 @@
   </div>
 </template>
 
-<script>
-export default {
-  async asyncData() {
-    try {
-      const response = await fetch('https://test.agence-lt.fr/wp-json/wp/v2/posts');
-      const posts = await response.json();
-      return { posts };
-    } catch (error) {
-      console.error('An error occurred:', error);
-      return { posts: [] };
-    }
-  }
-};
+<script setup>
+import { useAsyncData } from 'nuxt/app'
+
+const { data: posts, error } = await useAsyncData('posts', () =>
+  fetch('https://test.agence-lt.fr/wp-json/wp/v2/posts').then(res => res.json())
+)
+
+if (error.value) {
+  console.error('An error occurred:', error.value)
+}
 </script>
 
 <style>
