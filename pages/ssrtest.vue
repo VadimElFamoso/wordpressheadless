@@ -1,10 +1,15 @@
 <template>
     <h1>SSRTest</h1>
     <p>Bonjour</p>
-    <div v-if="pages.length">
+    <div v-if="posts.length">
       <ul>
-        <li v-for="page in pages" :key="page.id">{{ page.title.rendered }}</li>
+        <li v-for="post in posts" :key="post.id">{{ post.title.rendered }}</li>
       </ul>
+
+      <h1> {{ post.title }}</h1>
+      <div class="article_content">
+        {{ post.content.rendered }}
+      </div>
     </div>
     <div v-else>
       No pages fetched yet.
@@ -25,7 +30,7 @@
     methods: {
       async displayPages(root) {
         try {
-          const pages = await $fetch(`${root}wp-json/wp/v2/pages`, {
+          const pages = await $fetch(`${root}wp-json/wp/v2/posts`, {
             parseResponse: JSON.parse,
             method: 'GET',
           });
