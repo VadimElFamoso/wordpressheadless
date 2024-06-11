@@ -9,7 +9,7 @@
   import { useAsyncData, useRoute } from 'nuxt/app'
   
   const route = useRoute()
-  const { data: post, error } = await useAsyncData(`post-${route.params.id}`, () =>
+  const { data: post, error } = await useAsyncData(`posts-${route.params.id}`, () =>
     fetch(`https://test.agence-lt.fr/wp-json/wp/v2/posts/${route.params.id}`).then(res => res.json())
   )
   
