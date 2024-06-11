@@ -2,14 +2,15 @@
   <h1>SSRTest</h1>
   <p>Bonjour</p>
   <div v-if="posts.length">
-    <div v-for="post in posts" :key="post.id" class="article_content">
-      <h1>{{ post.title.rendered }}</h1>
-      <div v-html="post.content.rendered"></div>
-    </div>
 
+    <h1>Voici la liste des articles :</h1>
     <ul>
-      <li v-for="post in posts" :key="post.id">{{ post.title.rendered }}</li>
+      <li v-for="post in posts" :key="post.id">{{ post.title.rendered }}
+        <p>Afin de voir l'article cliquez sur le lien suivant : <a href="{{ post.link }}">ici</a></p>
+      </li>
     </ul>
+
+
   </div>
   <div v-else>
     No pages fetched yet.
