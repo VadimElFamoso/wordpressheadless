@@ -12,6 +12,7 @@
   </template>
   
   <script>
+
   export default {
     data() {
       return {
@@ -19,12 +20,12 @@
       };
     },
     async mounted() {
-      await this.displayPages();
+      await this.displayPages('https://test.agence-lt.fr/');
     },
     methods: {
-      async displayPages() {
+      async displayPages(root) {
         try {
-          const pages = await $fetch(`${process.env.WORDPRESS_HOST}wp-json/wp/v2/pages`, {
+          const pages = await $fetch(`${root}wp-json/wp/v2/pages`, {
             parseResponse: JSON.parse,
             method: 'GET',
           });
