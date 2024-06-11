@@ -2,14 +2,16 @@
     <h1>SSRTest</h1>
     <p>Bonjour</p>
     <div v-if="posts.length">
+      <div v-for="post in posts" :key="post.id" class="article_content">
+        <h1> {{ post.title }} </h1>
+        {{ post.content.rendered }}
+      </div>
+
+
       <ul>
         <li v-for="post in posts" :key="post.id">{{ post.title.rendered }}</li>
       </ul>
 
-      <h1> {{ post.title }}</h1>
-      <div class="article_content">
-        {{ post.content.rendered }}
-      </div>
     </div>
     <div v-else>
       No pages fetched yet.
