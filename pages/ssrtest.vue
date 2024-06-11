@@ -7,7 +7,7 @@
       <li v-for="post in posts" :key="post.id">
         {{ post.title.rendered }}
         <p>
-          Afin de voir l'article cliquez sur le lien suivant : 
+          Afin de voir l'article cliquez sur le lien suivant :
           <nuxt-link :to="{ name: 'posts-id', params: { id: post.id } }">ici</nuxt-link>
         </p>
       </li>
@@ -19,15 +19,18 @@
 </template>
 
 <script setup>
-import { useAsyncData } from 'nuxt/app'
+import { ref, onMounted } from 'vue'
 
-const { data: posts, error } = await useAsyncData('posts', () =>
-  fetch('https://test.agence-lt.fr/wp-json/wp/v2/posts').then(res => res.json())
-)
+const posts = ref([])
 
-if (error.value) {
-  console.error('An error occurred:', error.value)
-} else {
-  console.log(posts.value)  // Debug: log the posts data
+const fetchPosts = async () => {
+  try {
+    const res = await fetch('https://test.agence-lt.fr/wp-json/wp/v2/posts')
+    posts.value = await res.json()
+  } catch (error) {
+    console.error('An error occurred:', error)
+  }
 }
+
+onMounted(fetchPosts)
 </script>
