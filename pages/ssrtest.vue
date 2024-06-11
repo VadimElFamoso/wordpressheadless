@@ -18,27 +18,16 @@
 
 <script>
 export default {
-  data() {
-    return {
-      posts: [],
-    };
-  },
-  async mounted() {
-    await this.displayPages('https://test.agence-lt.fr/');
-  },
-  methods: {
-    async displayPages(root) {
-      try {
-        const posts = await $fetch(`${root}wp-json/wp/v2/posts`, {
-          parseResponse: JSON.parse,
-          method: 'GET',
-        });
-        this.posts = posts;
-      } catch (error) {
-        console.error('An error occurred:', error);
-      }
-    },
-  },
+  async asyncData() {
+    try {
+      const response = await fetch('https://test.agence-lt.fr/wp-json/wp/v2/posts');
+      const posts = await response.json();
+      return { posts };
+    } catch (error) {
+      console.error('An error occurred:', error);
+      return { posts: [] };
+    }
+  }
 };
 </script>
 
