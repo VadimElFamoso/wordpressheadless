@@ -5,11 +5,14 @@
 
     <h1>Voici la liste des articles :</h1>
     <ul>
-      <li v-for="post in posts" :key="post.id">{{ post.title.rendered }}
-        <p>Afin de voir l'article cliquez sur le lien suivant : <a :href="post.link">ici</a></p>
+      <li v-for="post in posts" :key="post.id">
+        {{ post.title.rendered }}
+        <p>
+          Afin de voir l'article cliquez sur le lien suivant : 
+          <nuxt-link :to="{ name: 'posts-id', params: { id: post.id } }">ici</nuxt-link>
+        </p>
       </li>
     </ul>
-
 
   </div>
   <div v-else>
