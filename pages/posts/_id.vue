@@ -17,6 +17,7 @@ const post = ref(null)
 
 onMounted(async () => {
   try {
+    console.log(route.params.id);
     const res = await fetch(`https://test.agence-lt.fr/wp-json/wp/v2/posts/${route.params.id}`)
     if (!res.ok) {
       throw new Error('Failed to fetch the post')
