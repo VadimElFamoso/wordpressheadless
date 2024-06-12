@@ -1,6 +1,5 @@
 <template>
   <h1>SSRTest</h1>
-  <p>Bonjour</p>
   <div v-if="posts && posts.length">
     <h1>Voici la liste des articles :</h1>
     <ul>
@@ -8,7 +7,7 @@
         {{ post.title.rendered }}
         <p>
           Afin de voir l'article cliquez sur le lien suivant : 
-          <nuxt-link :to="{ name: 'posts-id', params: { id: post.id } }">ici</nuxt-link>
+          <nuxt-link :to="{ name: 'posts-id', params: { id: post.id } }">Lien de l'article</nuxt-link>
         </p>
       </li>
     </ul>
@@ -22,7 +21,7 @@
 import { useAsyncData } from 'nuxt/app'
 
 const { data: posts, error } = await useAsyncData('posts', () =>
-  fetch('https://test.agence-lt.fr/wp-json/wp/v2/posts').then(res => res.json())
+  fetch('http://wordpress.home/wp-json/wp/v2/posts').then(res => res.json())
 )
 
 if (error.value) {

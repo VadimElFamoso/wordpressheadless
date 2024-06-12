@@ -1,13 +1,12 @@
 <template>
-  <SsrTest/>
+  <div class="container">
+    <router-view />
+  </div>
 </template>
 
 <script>
-import SsrTest from './pages/ssrtest.vue';
 export default {
-  components:{
-    SsrTest,
-  }
+
 }
 </script>
 
